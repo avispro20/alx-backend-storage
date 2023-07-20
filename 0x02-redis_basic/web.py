@@ -14,13 +14,11 @@ an expiration time of 10 seconds.
 Tip: Use http://slowwly.robertomurray.co.uk to simulate
 a slow response and test your caching."""
 
-
 import redis
 import requests
 from functools import wraps
 
 r = redis.Redis()
-
 
 def url_access_count(method):
     """decorator for get_page function"""
@@ -42,13 +40,11 @@ def url_access_count(method):
         return html_content
     return wrapper
 
-
 @url_access_count
 def get_page(url: str) -> str:
     """obtain the HTML content of a particular"""
     results = requests.get(url)
     return results.text
-
 
 if __name__ == "__main__":
     get_page('http://slowwly.robertomurray.co.uk')
